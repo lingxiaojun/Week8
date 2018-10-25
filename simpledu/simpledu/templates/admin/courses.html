@@ -1,0 +1,49 @@
+{% extends "admin/index.html" %}
+{% from "macros.html" import render_pagination %}
+
+{% block title %}
+Admin - courses
+{% endblock %}
+
+{% block operation %}
+<a href="{{ url_for('admin.create_course') }}" type="button" class="btn btn-primary">
+<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+tianjiakechen
+</a>
+{% endblock %}
+
+{% block admin %}
+<table class="table">
+<thead>
+<tr>
+<th>ID</th>
+<th>mingchen</th>
+<th>zuozhe</th>
+<th>caozuo</th>
+</tr>
+<tbody>
+{% for course in pagination.items %}
+<tr>
+<td>{{ course.id }}</td>
+<td>{{ course.name }}</td>
+<td>{{ course.author.username }}</td>
+<td>
+<!-- ????? Bootstrap ? icon ????????? -->
+<div class="btn-group" role="group">
+<a href="" type="button" class="btn btn-default" title?"bianji">
+<span class="glyphicon glyphicon-pencil" title?"bianji" aria-hidden="true"></span>
+</a>
+<a href="" type="button" class="btn btn-default" title?"shanchu">
+<span class="glyphicon glyphicon-trash" title?"shanchu" aria-hidden="true"></span>
+</a>
+</div>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</thead>
+</table>
+
+<!-- ?? macro ???? -->
+{{ render_pagination(pagination, 'admin.courses') }}
+{% endblock %}
