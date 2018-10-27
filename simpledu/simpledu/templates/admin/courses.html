@@ -30,11 +30,11 @@ tianjiakechen
 <td>
 <!-- ????? Bootstrap ? icon ????????? -->
 <div class="btn-group" role="group">
-<a href="" type="button" class="btn btn-default" title?"bianji">
-<span class="glyphicon glyphicon-pencil" title?"bianji" aria-hidden="true"></span>
+<a href="{{ url_for('admin.edit_course', course_id=course.id) }}" type="button" class="btn btn-default" title="bianji">
+    <span class="glyphicon glyphicon-pencil" title="bianji" aria-hidden="true"></span>
 </a>
-<a href="" type="button" class="btn btn-default" title?"shanchu">
-<span class="glyphicon glyphicon-trash" title?"shanchu" aria-hidden="true"></span>
+<a href="{{ url_for('admin.delete_course', course_id=course.id) }}" type="button" class="btn btn-default" title="shanchu">
+<span class="glyphicon glyphicon-trash" title="shanchu" aria-hidden="true"></span>
 </a>
 </div>
 </td>

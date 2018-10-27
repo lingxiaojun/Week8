@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, current_app, redirect, url_for, flash
 from simpledu.decorators import admin_required
 from simpledu.models import Course
-from simpledu.forms import CourseForm
+from simpledu.forms import CourseForm, db
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -30,4 +30,24 @@ def create_course():
         flash('kechenchangjianchengong', 'success')
         return redirect(url_for('admin.courses'))
     return render_template('admin/create_course.html', form=form)
-:
+
+@admin.route('/courses/<int:course_id>/edit', methods=['GET', 'POST'])
+@admin_required
+def edit_course(course_id):
+    course = Course.query.get_or_404(course_id)
+    form = CourseForm(obj=course)
+    if form.validate_on_submit():
+        form.update_course(course)
+        flash('kechengengxianchengong', 'success')
+        return redirect(url_for('admin.courses'))
+    return render_template('admin/edit_course.html', form=form, course=course)
+
+@admin.route('/courses/<int:course_id>/delete')
+@admin_required
+def delete_course(course_id):
+    course = Course.query.get_or_404(course_id)
+    db.session.delete(course)
+    db.session.commit()
+    flash('kechenshanchuchengong', 'success')
+    return redirect(url_for('admin.courses'))
+
